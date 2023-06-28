@@ -23,18 +23,14 @@ public class VendingMachine {
         else
             return false;
     }
-    
+
     public void addMoneyDenomination(MoneyDenomination denomination) {
         this.balance.add(denomination);
     }
     // Getters and Setters
 
-    public ArrayList<Item> getSlots() {
+    public ArrayList<Item> getItemList() {
         return itemList;
-    }
-
-    public void setSlots(ArrayList<Item> itemList) {
-        this.itemList = itemList;
     }
 
     public ArrayList<MoneyDenomination> getBalance() {
