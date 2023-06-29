@@ -50,10 +50,20 @@ public class Main {
 
 
         menuSystem.mainMenu();
-        menuSystem.mainMenuInput();
+        menuSystem.mainInput();
 
-        menuSystem.vendingMachineMenu(vm, vm.getItemList());
-        menuSystem.vendingMachineMenuInput(vm, vm.getItemList());
+        menuSystem.testVendingMachineFeaturesMenu();
+
+        menuSystem.createVendingMachineMenu();
+        menuSystem.createVendingMachineInput();
+
+        // menuSystem.createRegularVendingMachineMenu(vm);
+        // menuSystem.createRegularVendingMachineInput(vm);
+
+        // menuSystem.vendingMachineMenu(vm);
+        // menuSystem.vendingMachineInput(vm);
+
+
         
         // menuSystem.itemMenu((vm.getItemList()).get(0));
     }

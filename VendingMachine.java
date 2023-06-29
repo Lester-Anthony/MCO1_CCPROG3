@@ -14,7 +14,7 @@ public class VendingMachine {
 
     // General Features
 
-    public boolean addItem(String name, float price, int calories, int initStock) {
+    public boolean addItem(String name, float price, float calories, int initStock) {
         if(Item.itemCount < Constants.MAX_ITEMS) {
             Item item = new Item(name, price, calories, initStock);
             itemList.add(item);
@@ -28,6 +28,13 @@ public class VendingMachine {
         this.balance.add(denomination);
     }
     // Getters and Setters
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public ArrayList<Item> getItemList() {
         return itemList;
