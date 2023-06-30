@@ -2,19 +2,31 @@
  * Represents a money denomination with a specific denomination, value, and quantity.
  */
 public class MoneyDenomination {
+    private String name;
     private float value;
     private int quantity;
 
     /**
      * Constructs a MoneyDenomination object with the specified denomination, value, and quantity.
      *
+     * @param name         the name of the money
      * @param denomination the denomination of the money
      * @param value        the value of the money
      * @param quantity     the quantity of the money
      */
-    public MoneyDenomination(float value, int quantity) {
+    public MoneyDenomination(String name, float value, int quantity) {
+        this.name = name;
         this.value = value;
         this.quantity = quantity;
+    }
+
+    /**
+     * Returns the the name of the money.
+     * 
+     * @return the name of the money
+     */
+    public String getName() {
+        return name;
     }
 
     /**

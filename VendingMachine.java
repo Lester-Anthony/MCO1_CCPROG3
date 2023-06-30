@@ -4,12 +4,16 @@ public class VendingMachine {
     private String name;
     private ArrayList<Item> itemList;
     private ArrayList<MoneyDenomination> balance;
-    private ArrayList<Item> dispensedItemsList;
+    private ArrayList<Item> transactionHistory;
+
+    Constants c = new Constants();
+    StringSystem s = new StringSystem();
 
     public VendingMachine(String name) {
         this.name = name;
         this.itemList = new ArrayList<>();
         this.balance = new ArrayList<>();
+        this.transactionHistory = new ArrayList<>();
     }
 
     // General Features
@@ -38,6 +42,10 @@ public class VendingMachine {
 
     public ArrayList<Item> getItemList() {
         return itemList;
+    }
+
+    public ArrayList<Item> getTransactionHistory() {
+        return transactionHistory;
     }
 
     public ArrayList<MoneyDenomination> getBalance() {
@@ -69,8 +77,74 @@ public class VendingMachine {
 
     }
 
-    public void produceChange(float cost) {
+    public ArrayList<MoneyDenomination> produceChange(float cost, float payment) {
         // Implementation
+        ArrayList<MoneyDenomination> changeList = new ArrayList<>();
+
+        changeList.add(new MoneyDenomination("PHP 1000", 1000,0));
+        changeList.add(new MoneyDenomination("PHP 500", 500, 0));
+        changeList.add(new MoneyDenomination("PHP 200", 200, 0));
+        changeList.add(new MoneyDenomination("PHP 100", 100, 0));
+        changeList.add(new MoneyDenomination("PHP 50", 50, 0));
+        changeList.add(new MoneyDenomination("PHP 20", 20, 0));
+        changeList.add(new MoneyDenomination("PHP 10", 10, 0));
+        changeList.add(new MoneyDenomination("PHP 5", 5, 0));
+        changeList.add(new MoneyDenomination("PHP 1", 1, 0));
+
+        float change = payment - cost;
+
+        int i = 0;
+
+        for(MoneyDenomination denomination : balance) {
+
+            if(denomination.getQuantity() > 0) {
+                if(denomination.getValue() <= change) {
+                    while(denomination.getValue() <= change) {
+
+                        denomination.setQuantity(denomination.getQuantity() - 1);
+                        (changeList.get(i)).setQuantity((changeList.get(i)).getQuantity() + 1);
+                        change -= denomination.getValue();
+                    }
+                }
+            }
+            i++;
+        }
+
+        return changeList;
+    }
+
+    public boolean dispenseChange(ArrayList<MoneyDenomination> changeList, float cost, float payment) {
+        float totalChange = 0;
+        float change = payment - cost;
+        System.out.println();
+
+        for(MoneyDenomination denomination : changeList) {
+            if(denomination.getQuantity() > 0) {
+                if(denomination.getValue() > 20) {
+                    if(denomination.getQuantity() == 1)
+                        System.out.println("   Dispensing " + denomination.getQuantity() + " " + denomination.getName() + " bill...");
+                    else
+                        System.out.println("   Dispensing " + denomination.getQuantity() + " " + denomination.getName() + " bills...");
+                    }
+                else {
+                    if(denomination.getQuantity() == 1)
+                        System.out.println("   Dispensing " + denomination.getQuantity() + " " + denomination.getName() + " coin...");
+                    else
+                        System.out.println("   Dispensing " + denomination.getQuantity() + " " + denomination.getName() + " coins...");
+                }
+            }
+            totalChange += denomination.getValue() * denomination.getQuantity();
+
+            
+            
+        }
+        System.out.println(totalChange + " " + change);
+        if(totalChange != change) {
+            System.out.println(s.centerString(c.RED + "ERROR! Machine has insufficient balance." + c.RST, 51));
+            return false;
+        }
+        System.out.println("\n" + s.centerString(c.GRN + "TOTAL CHANGE : PHP " + totalChange + c.RST, 51));
+        return true;
     }
 
     // Maintenance Features
@@ -85,15 +159,19 @@ public class VendingMachine {
         (itemList.get(itemIndex)).setPrice(price);
     }
 
-    public void collectEarnings() {
-        // Implementation
+    public void addTransaction(Item item) {
+        Item transactionItem = new Item(item.getName(), item.getPrice(), item.getCalories(), 0);
+        transactionHistory.add(transactionItem);
     }
+    public void transactionSummary(ArrayList<Item> transactionHistory) {
+        float totalEarnings = 0;
 
-    public void replenishMoney(int denominationIndex, int quantity) {
-        // Implementation
-    }
-
-    public void transactionSummary() {
-        // Implementation
+        System.out.println("\n>========< TRANSACTION HISTORY >========<\n");
+        for(Item item : transactionHistory) {
+            System.out.println(c.SPACER + item.getName() + " | PHP " + item.getPrice());
+            totalEarnings += item.getPrice();
+        }
+        System.out.println("\n" + s.centerString(c.GRN + "TOTAL EARNINGS : PHP" + totalEarnings + c.RST, 51));
+        System.out.println("\n>=======================================<");
     }
 }
