@@ -6,6 +6,8 @@ public class MoneyDenomination {
     private float value;
     private int quantity;
 
+    // CONSTRUCTOR
+
     /**
      * Constructs a MoneyDenomination object with the specified denomination, value, and quantity.
      *
@@ -19,6 +21,8 @@ public class MoneyDenomination {
         this.value = value;
         this.quantity = quantity;
     }
+
+    // GETTERS
 
     /**
      * Returns the the name of the money.
@@ -46,6 +50,8 @@ public class MoneyDenomination {
     public int getQuantity() {
         return quantity;
     }
+
+    // SETTER
 
     /**
      * Sets the quantity of the money.

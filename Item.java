@@ -9,6 +9,8 @@ public class Item {
     private int stock;
     static int itemCount = 0;
 
+    // CONSTRUCTOR
+
     /**
      * Constructs an Item object with the specified name, price, calories, and initial stock quantity.
      *
@@ -23,6 +25,8 @@ public class Item {
         this.calories = calories;
         this.stock = initStock;
     }
+
+    // GETTERS
 
     /**
      * Returns the name of the item.
@@ -43,15 +47,6 @@ public class Item {
     }
 
     /**
-     * Sets the price of the item.
-     *
-     * @param price the new price of the item
-     */
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
-    /**
      * Returns the calories of the item.
      *
      * @return the calories of the item
@@ -69,12 +64,23 @@ public class Item {
         return stock;
     }
 
+    // SETTERS
+
+    /**
+     * Sets the price of the item.
+     *
+     * @param price the new price of the item
+     */
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
     /**
      * Sets the stock quantity of the item.
      *
-     * @param amount the new stock quantity of the item
+     * @param stock the new stock quantity of the item
      */
-    public void setStock(int amount) {
-        this.stock = amount;
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 }
